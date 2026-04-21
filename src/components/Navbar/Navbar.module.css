@@ -1,0 +1,65 @@
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: stretch;
+
+  background-color: #0f1117;
+  border-top: 1px solid rgba(99, 102, 241, 0.35);
+  padding: 0 8px;
+  height: 68px;
+
+  /* subtle top glow matching the screenshot's purple tint */
+  box-shadow: 0 -1px 0 0 rgba(99, 102, 241, 0.2), 0 -8px 24px rgba(99, 102, 241, 0.08);
+}
+
+.navItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  color: #6b7280;
+  text-decoration: none;
+  border-radius: 10px;
+  margin: 6px 2px;
+  padding: 6px 4px;
+
+  transition: color 0.18s ease, background-color 0.18s ease;
+  cursor: pointer;
+}
+
+.navItem:hover {
+  color: #a5b4fc;
+  background-color: rgba(99, 102, 241, 0.08);
+}
+
+.navItem.active {
+  color: #e0e7ff;
+  background-color: rgba(99, 102, 241, 0.18);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* slight scale-up on active for polish */
+  transition: transform 0.18s ease;
+}
+
+.navItem.active .iconWrapper {
+  transform: scale(1.08);
+}
+
+.label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
