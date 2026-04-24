@@ -1,0 +1,374 @@
+/* ─── Page shell ──────────────────────────────────────────────── */
+
+.page {
+    padding: 20px 20px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #0a0a0f;
+    min-height: 100%;
+    max-width: 480px;
+    margin-inline: auto;
+    width: 100%;
+}
+
+/* ─── Calendar card ───────────────────────────────────────────── */
+
+.calendarCard {
+    background: #0f1117;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 16px;
+    padding: 16px 12px 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.calendarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding: 0 4px;
+}
+
+.monthLabel {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #e0e7ff;
+}
+
+.chevron {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #a5b4fc;
+    font-size: 22px;
+    line-height: 1;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: color 0.15s, background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chevronDisabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ─── Calendar grid ───────────────────────────────────────────── */
+
+.calendarGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px 2px;
+}
+
+.weekday {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #4b5563;
+    padding-bottom: 6px;
+    letter-spacing: 0.04em;
+}
+
+/* Base day cell — works for both <button> and <span> */
+.day {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, transform 0.12s, box-shadow 0.15s;
+    position: relative;
+    width: 100%;
+    min-height: 0;
+}
+
+.day:hover:not(.filler) {
+    background: rgba(99, 102, 241, 0.12);
+    color: #c7d2fe;
+}
+
+/* Filler days (prev/next month) */
+.filler {
+    color: #2d3148;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Future days — not yet reached */
+.future {
+    color: #2d3148;
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* Filler days that are in the past — navigable */
+.fillerClickable {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.fillerClickable:hover {
+    color: #4b5563;
+    background: rgba(99, 102, 241, 0.06);
+}
+
+/* Active (worked out) */
+.active {
+    background: rgba(16, 185, 129, 0.18);
+    color: #6ee7b7;
+}
+
+.active:hover {
+    background: rgba(16, 185, 129, 0.28);
+    color: #a7f3d0;
+}
+
+/* Missed (should have worked out but didn't) */
+.missed {
+    background: rgba(239, 68, 68, 0.16);
+    color: #fca5a5;
+}
+
+.missed:hover {
+    background: rgba(239, 68, 68, 0.26);
+    color: #fecaca;
+}
+
+/* Selected */
+.selected {
+    background: #6366f1 !important;
+    color: #fff !important;
+    font-weight: 700;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.45), 0 2px 12px rgba(99, 102, 241, 0.4);
+    transform: scale(1.08);
+}
+
+/* Today ring (when not selected) */
+.today:not(.selected)::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(99, 102, 241, 0.6);
+    pointer-events: none;
+}
+
+/* ─── Workout detail section ──────────────────────────────────── */
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-bottom: 8px;
+}
+
+.sessionDate {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: 0.01em;
+}
+
+/* ─── Muscle group ────────────────────────────────────────────── */
+
+.muscleGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.groupName {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #818cf8;
+    text-transform: uppercase;
+}
+
+.groupName::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.3) 0%, transparent 100%);
+}
+
+/* ─── Exercise list ───────────────────────────────────────────── */
+
+.exerciseList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(180deg, #12131c 0%, #0d0e14 100%);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.exerciseItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.exerciseItem+.exerciseItem {
+    border-top: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+.exerciseItem:hover {
+    background: rgba(99, 102, 241, 0.08);
+}
+
+.exName {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.exMetaContainer {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.exBadge {
+    font-size: 11px;
+    font-weight: 600;
+    color: #cbd5e1;
+    background: rgba(148, 163, 184, 0.12);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    padding: 4px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+}
+
+.exPrBadge {
+    color: #e0e7ff;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(79, 70, 229, 0.3) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
+}
+
+.exerciseItem:hover .exPrBadge {
+    box-shadow: 0 0 14px rgba(99, 102, 241, 0.3);
+    border-color: rgba(99, 102, 241, 0.6);
+    transform: translateY(-1px);
+}
+
+/* ─── Empty / rest day state ──────────────────────────────────── */
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 48px 24px;
+    background: #0f1117;
+    border: 1px dashed rgba(99, 102, 241, 0.2);
+    border-radius: 16px;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.emptyIcon {
+    font-size: 36px;
+    line-height: 1;
+}
+
+.emptyTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.emptySubtitle {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* ─── Skeleton loading ────────────────────────────────────────── */
+
+@keyframes shimmer {
+    0% {
+        background-position: -300px 0;
+    }
+
+    100% {
+        background-position: 300px 0;
+    }
+}
+
+.skeleton {
+    border-radius: 8px;
+    background: linear-gradient(90deg,
+            #1a1d2e 25%,
+            #232640 50%,
+            #1a1d2e 75%);
+    background-size: 600px 100%;
+    animation: shimmer 1.4s infinite linear;
+}
+
+.skeletonWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 4px 0;
+}
+
+.skeletonTitle {
+    height: 24px;
+    width: 40%;
+}
+
+.skeletonGroup {
+    height: 14px;
+    width: 25%;
+    margin-top: 4px;
+}
+
+.skeletonItem {
+    height: 56px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* ─── Micro animation ─────────────────────────────────────────── */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.detail>* {
+    animation: fadeIn 0.28s ease;
+}
