@@ -1,0 +1,439 @@
+/* ─── Page shell ──────────────────────────────────────────────── */
+
+.page {
+    padding: 40px 20px 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: #0a0a0f;
+    min-height: 100%;
+    max-width: 480px;
+    margin-inline: auto;
+    width: 100%;
+}
+
+/* ─── Header ──────────────────────────────────────────────────── */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -8px;
+}
+
+.headerTextWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dateTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e0e7ff;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ─── Cards ───────────────────────────────────────────────────── */
+
+.card {
+    background: #15151a;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardTitle {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    color: #cbd5e1;
+    text-transform: uppercase;
+}
+
+.iconButton {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.1s ease;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.parentTrashBtn {
+    margin-right: 16px;
+}
+
+.iconButton:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.iconButton:active {
+    transform: scale(0.95);
+}
+
+/* ─── Inputs ──────────────────────────────────────────────────── */
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputField {
+    background: #0a0a0f;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #f8fafc;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.inputField:focus {
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+.inputField::placeholder {
+    color: #475569;
+}
+
+/* ─── Exercise Card (Inner) ───────────────────────────────────── */
+
+.exerciseCard {
+    background: #0a0a0f;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Sets Table ──────────────────────────────────────────────── */
+
+.setsTable {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tableHeader {
+    display: grid;
+    grid-template-columns: 32px 1fr 1fr 32px;
+    gap: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.tableHeader span:nth-child(2),
+.tableHeader span:nth-child(3) {
+    text-align: center;
+}
+
+.setRow {
+    display: grid;
+    grid-template-columns: 32px 1fr 1fr 32px;
+    gap: 12px;
+    align-items: center;
+}
+
+.setNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.numberInput {
+    background: #1a1a20;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #64748b;
+    text-align: center;
+    width: 100%;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.numberInput:focus {
+    color: #f8fafc;
+    border-color: rgba(99, 102, 241, 0.5);
+    background: #202026;
+}
+
+.numberInput::placeholder {
+    color: #475569;
+}
+
+.removeSetBtn {
+    background: transparent;
+    border: none;
+    color: #475569;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    padding: 4px;
+}
+
+.removeSetBtn:hover {
+    color: #ef4444;
+}
+
+/* ─── Add Set Button ──────────────────────────────────────────── */
+
+.addSetButton {
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #64748b;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+}
+
+.addSetButton:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* ─── Action Buttons ──────────────────────────────────────────── */
+
+.floatingActionContainer {
+    position: fixed;
+    bottom: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    z-index: 90;
+    pointer-events: none;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.addMuscleGroupBtn {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.15) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #e0e7ff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.05);
+}
+
+.addMuscleGroupBtn:hover {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.25) 100%);
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+    transform: translateY(-1px);
+}
+
+.addMuscleGroupBtn:active {
+    transform: scale(0.98);
+}
+
+.addInnerExerciseBtn {
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #94a3b8;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.addInnerExerciseBtn:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #cbd5e1;
+}
+
+.addInnerExerciseBtn:active {
+    transform: scale(0.98);
+}
+
+.finalizeBtn {
+    background: #dbeafe;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #1e3a8a;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 16px rgba(219, 234, 254, 0.2);
+    pointer-events: auto;
+}
+
+.finalizeBtn:hover {
+    background: #eff6ff;
+    box-shadow: 0 6px 20px rgba(219, 234, 254, 0.3);
+}
+
+.finalizeBtn:active {
+    transform: scale(0.98);
+}
+
+.finalizeIcon {
+    color: #1e3a8a;
+    display: flex;
+}
+
+/* ─── Modal ───────────────────────────────────────────────────── */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 24px;
+}
+
+.modalContent {
+    background: #15151a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modalTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.modalText {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+.modalActions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.modalCancelBtn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modalCancelBtn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.modalDeleteBtn {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fca5a5;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modalDeleteBtn:hover {
+    background: rgba(239, 68, 68, 0.25);
+    color: #fecaca;
+}
