@@ -52,9 +52,15 @@ export default function Home() {
                     </a>
                     <a
                         className={styles.secondary}
-                        href="/hub"
+                        href="/logs"
                     >
-                        Hub
+                        Logs
+                    </a>
+                    <a
+                        className={styles.secondary}
+                        href="/create"
+                    >
+                        Create
                     </a>
                 </div>
             </main>

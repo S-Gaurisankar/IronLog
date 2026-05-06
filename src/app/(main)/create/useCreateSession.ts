@@ -2,27 +2,9 @@ import { useState } from 'react';
 import { MuscleGroup, ModalConfig } from './types';
 import { CREATE_CONSTANTS } from 'src/constants';
 
-
-
-const initialMuscleGroupState = {
-    id: 'mg-1',
-    name: '',
-    exercises: [
-        {
-            id: 'ex-1',
-            name: '',
-            sets: [
-                { id: 'set-1', kg: '', reps: '' }
-            ]
-        }
-    ]
-};
-
 export const useCreateSession = () => {
     const [modalConfig, setModalConfig] = useState<ModalConfig | null>(null);
-    const [muscleGroups, setMuscleGroups] = useState<MuscleGroup[]>([
-        initialMuscleGroupState
-    ]);
+    const [muscleGroups, setMuscleGroups] = useState<MuscleGroup[]>([]);
 
     const handleUpdateMuscleGroup = (mgId: string, name: string) => {
         setMuscleGroups(prev => prev.map(mg => mg.id === mgId ? { ...mg, name } : mg));

@@ -6,7 +6,6 @@ import { MuscleGroup } from './types';
 import ExerciseCard from './ExerciseCard';
 
 
-// Props
 interface MuscleGroupCardProps {
     mg: MuscleGroup;
     onUpdateName: (mgId: string, name: string) => void;
@@ -19,17 +18,14 @@ interface MuscleGroupCardProps {
     handleRemoveSet: (mgId: string, exId: string, setId: string) => void;
 }
 
-interface MuscleGroupCardHeaderProps {
+interface MuscleGroupHeaderProps {
     mg: MuscleGroup;
     onUpdateName: (mgId: string, name: string) => void;
     onRemoveRequest: (mgId: string) => void;
 }
 
-
-//Render
-const MuscleGroupHeader = ({ onRemoveRequest, onUpdateName, mg }: MuscleGroupCardHeaderProps) => (
-
-    <div className={styles.inputGroup}>
+const MuscleGroupHeader = ({ onRemoveRequest, onUpdateName, mg }: MuscleGroupHeaderProps) => (
+    <>
         <div className={styles.cardHeader}>
             <span className={styles.cardTitle}>{CREATE_CONSTANTS.MUSCLE_GROUP_LABEL}</span>
             <button
@@ -40,16 +36,17 @@ const MuscleGroupHeader = ({ onRemoveRequest, onUpdateName, mg }: MuscleGroupCar
                 <TrashIcon />
             </button>
         </div>
-
-        <input
-            type="text"
-            className={styles.inputField}
-            value={mg.name}
-            onChange={(e) => onUpdateName(mg.id, e.target.value)}
-            placeholder={CREATE_CONSTANTS.PLACEHOLDER_MUSCLE_GROUP}
-        />
-    </div>
-)
+        <div className={styles.inputGroup}>
+            <input
+                type="text"
+                className={styles.inputField}
+                value={mg.name}
+                onChange={(e) => onUpdateName(mg.id, e.target.value)}
+                placeholder={CREATE_CONSTANTS.PLACEHOLDER_MUSCLE_GROUP}
+            />
+        </div>
+    </>
+);
 
 
 export default function MuscleGroupCard({
@@ -61,29 +58,30 @@ export default function MuscleGroupCard({
     handleAddExercise,
     handleUpdateSet,
     handleAddSet,
-    handleRemoveSet
+    handleRemoveSet,
 }: MuscleGroupCardProps) {
     return (
         <div className={styles.card}>
-
             <MuscleGroupHeader
                 onRemoveRequest={onRemoveRequest}
                 onUpdateName={onUpdateName}
                 mg={mg}
             />
 
-            {mg.exercises.map(ex => (
-                <ExerciseCard
-                    key={ex.id}
-                    mgId={mg.id}
-                    exercise={ex}
-                    onUpdateName={onUpdateExercise}
-                    onRemove={onRemoveExercise}
-                    onUpdateSet={handleUpdateSet}
-                    onRemoveSet={handleRemoveSet}
-                    onAddSet={handleAddSet}
-                />
-            ))}
+            <div className={styles.exerciseList}>
+                {mg.exercises.map((ex) => (
+                    <ExerciseCard
+                        key={ex.id}
+                        mgId={mg.id}
+                        exercise={ex}
+                        onUpdateName={onUpdateExercise}
+                        onRemove={onRemoveExercise}
+                        onUpdateSet={handleUpdateSet}
+                        onRemoveSet={handleRemoveSet}
+                        onAddSet={handleAddSet}
+                    />
+                ))}
+            </div>
 
             <button
                 className={styles.addInnerExerciseBtn}

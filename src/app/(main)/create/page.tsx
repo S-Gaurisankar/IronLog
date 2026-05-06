@@ -1,33 +1,59 @@
 'use client';
 
 import styles from './page.module.css';
-import { PlusCircleSolidIcon, CheckCircleSolidIcon } from 'src/assets';
+import { PlusCircleSolidIcon, CheckCircleSolidIcon, DumbbellIcon } from 'src/assets';
 import { CREATE_CONSTANTS } from 'src/constants';
 import { useCreateSession } from './useCreateSession';
 import MuscleGroupCard from './MuscleGroupCard';
 import ConfirmModal from './ConfirmModal';
 
 
-const AddMuscleGroupBtn = ({ handleAddMuscleGroup }: { handleAddMuscleGroup: () => void }) => {
-    return (
-        <button className={styles.addMuscleGroupBtn} onClick={handleAddMuscleGroup}>
-            <span className={styles.addExerciseIcon}><PlusCircleSolidIcon /></span>
-            {CREATE_CONSTANTS.ADD_MUSCLE_GROUP_BTN}
-        </button>
-    )
+//Props
+interface CreateSessionHeaderProps {
+    getDateHeader: () => string;
+    handleAddMuscleGroup: () => void;
 }
 
-const CreateSessionHeader = ({ getDateHeader, handleAddMuscleGroup }: { getDateHeader: () => string, handleAddMuscleGroup: () => void }) => {
-    return (
-        <header className={styles.header}>
-            <div className={styles.headerTextWrapper}>
-                <h1 className={styles.dateTitle}>{getDateHeader()}</h1>
-                <span className={styles.subtitle}>{CREATE_CONSTANTS.SUBTITLE}</span>
-            </div>
-            <AddMuscleGroupBtn handleAddMuscleGroup={handleAddMuscleGroup} />
-        </header>
-    )
+interface AddMuscleGroupBtnProps {
+    handleAddMuscleGroup: () => void;
 }
+
+interface EmptyStateProps {
+    onAdd: () => void;
+}
+
+
+//Components
+const AddMuscleGroupBtn = ({ handleAddMuscleGroup }: AddMuscleGroupBtnProps) => (
+    <button className={styles.addMuscleGroupBtn} onClick={handleAddMuscleGroup}>
+        <span className={styles.addExerciseIcon}><PlusCircleSolidIcon /></span>
+        {CREATE_CONSTANTS.ADD_MUSCLE_GROUP_BTN}
+    </button>
+);
+
+const CreateSessionHeader = ({
+    getDateHeader,
+    handleAddMuscleGroup,
+}: CreateSessionHeaderProps) => (
+    <header className={styles.header}>
+        <div className={styles.headerTextWrapper}>
+            <h1 className={styles.dateTitle}>{getDateHeader()}</h1>
+            <span className={styles.subtitle}>{CREATE_CONSTANTS.SUBTITLE}</span>
+        </div>
+        <AddMuscleGroupBtn handleAddMuscleGroup={handleAddMuscleGroup} />
+    </header>
+);
+
+const EmptyState = ({ onAdd }: EmptyStateProps) => (
+    <div className={styles.emptyState}>
+        <span className={styles.emptyIcon}><DumbbellIcon /></span>
+        <p className={styles.emptyTitle}>{CREATE_CONSTANTS.EMPTY_STATE_HEADING}</p>
+        <p className={styles.emptySubtitle}>
+            {CREATE_CONSTANTS.EMPTY_STATE_SUBHEADING}
+        </p>
+        <AddMuscleGroupBtn handleAddMuscleGroup={onAdd} />
+    </div>
+);
 
 
 export default function CreateSessionPage() {
@@ -45,33 +71,43 @@ export default function CreateSessionPage() {
         handleRemoveSet,
         confirmModalAction,
         getModalText,
-        getDateHeader
-    } = useCreateSession()
+        getDateHeader,
+    } = useCreateSession();
+
+    if (!muscleGroups.length) {
+        return (
+            <div className={styles.page}>
+                <CreateSessionHeader getDateHeader={getDateHeader} handleAddMuscleGroup={handleAddMuscleGroup} />
+                <EmptyState onAdd={handleAddMuscleGroup} />
+            </div>
+        )
+    }
 
     return (
         <div className={styles.page}>
             <CreateSessionHeader getDateHeader={getDateHeader} handleAddMuscleGroup={handleAddMuscleGroup} />
 
-            {muscleGroups.map(mg => (
-                <MuscleGroupCard
-                    key={mg.id}
-                    mg={mg}
-                    onUpdateName={handleUpdateMuscleGroup}
-                    onRemoveRequest={(mgId) => setModalConfig({ type: 'muscleGroup', mgId })}
-                    onUpdateExercise={handleUpdateExercise}
-                    onRemoveExercise={handleRemoveExercise}
-                    handleAddExercise={handleAddExercise}
-                    handleUpdateSet={handleUpdateSet}
-                    handleAddSet={handleAddSet}
-                    handleRemoveSet={handleRemoveSet}
-                />
-            ))}
-
+            {
+                muscleGroups.map((mg) => (
+                    <MuscleGroupCard
+                        key={mg.id}
+                        mg={mg}
+                        onUpdateName={handleUpdateMuscleGroup}
+                        onRemoveRequest={(mgId) => setModalConfig({ type: 'muscleGroup', mgId })}
+                        onUpdateExercise={handleUpdateExercise}
+                        onRemoveExercise={handleRemoveExercise}
+                        handleAddExercise={handleAddExercise}
+                        handleUpdateSet={handleUpdateSet}
+                        handleAddSet={handleAddSet}
+                        handleRemoveSet={handleRemoveSet}
+                    />
+                ))
+            }
 
             <div className={styles.floatingActionContainer}>
                 <button className={styles.finalizeBtn}>
-                    {CREATE_CONSTANTS.FINALIZE_BTN}
                     <span className={styles.finalizeIcon}><CheckCircleSolidIcon /></span>
+                    {CREATE_CONSTANTS.FINALIZE_BTN}
                 </button>
             </div>
 
