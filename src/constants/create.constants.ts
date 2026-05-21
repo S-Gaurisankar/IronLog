@@ -10,6 +10,8 @@ export const CREATE_CONSTANTS = {
     ARIA_REMOVE_SET: 'Remove set',
 
     EXERCISE_NAME_LABEL: 'EXERCISE',
+    EMPTY_STATE_HEADING: 'Log Your Session',
+    EMPTY_STATE_SUBHEADING: "Tap 'Add Muscle Group' to start logging your session.",
 
     FINALIZE_BTN: 'LOG SESSION',
 

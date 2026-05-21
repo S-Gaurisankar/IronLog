@@ -1,0 +1,690 @@
+/* ─── Page shell ──────────────────────────────────────────────────────────── */
+
+.page {
+    padding: 24px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #0a0a0f;
+    min-height: 100%;
+    max-width: 480px;
+    margin-inline: auto;
+    width: 100%;
+}
+
+/* ─── Hero / Profile header card ──────────────────────────────────────────── */
+
+.heroCard {
+    background: linear-gradient(145deg, #0f1117 0%, #12131e 100%);
+    border: 1px solid rgba(99, 102, 241, 0.22);
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+.heroCard::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.heroTop {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatarWrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e1f2e 0%, #252740 100%);
+    border: 2px solid rgba(99, 102, 241, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+.avatarInitials {
+    font-size: 20px;
+    font-weight: 800;
+    color: #818cf8;
+    letter-spacing: -0.02em;
+    font-family: 'Inter', sans-serif;
+}
+
+.avatarOnline {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 12px;
+    height: 12px;
+    background: #10b981;
+    border: 2px solid #0a0a0f;
+    border-radius: 50%;
+}
+
+.heroInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.displayName {
+    font-size: 19px;
+    font-weight: 800;
+    color: #f1f5f9;
+    letter-spacing: -0.01em;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.2;
+}
+
+.username {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6366f1;
+    letter-spacing: 0.02em;
+}
+
+.editProfileBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    border-radius: 10px;
+    color: #818cf8;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+}
+
+.editProfileBtn:hover {
+    background: rgba(99, 102, 241, 0.22);
+    border-color: rgba(99, 102, 241, 0.6);
+    color: #c7d2fe;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+}
+
+.editProfileBtn:active {
+    transform: translateY(0);
+}
+
+/* ─── Stats row ───────────────────────────────────────────────────────────── */
+
+.statsRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(99, 102, 241, 0.12);
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 8px 4px;
+    background: linear-gradient(145deg, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.02));
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: 12px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    transition: all 0.2s ease;
+}
+
+.statItem:hover {
+    background: linear-gradient(145deg, rgba(99, 102, 241, 0.14), rgba(99, 102, 241, 0.04));
+    border-color: rgba(99, 102, 241, 0.35);
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 2px 8px rgba(99, 102, 241, 0.1);
+}
+
+.statLabel {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #818cf8;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+}
+
+.statValue {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f1f5f9;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+.statUnit {
+    font-size: 10px;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+/* ─── Activity summary cards ──────────────────────────────────────────────── */
+
+.activityRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.activityCard {
+    background: linear-gradient(145deg, #0f1117, #12131e);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: 16px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.activityCard:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+}
+
+.activityTop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.activityIcon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.activityValue {
+    font-size: 28px;
+    font-weight: 800;
+    color: #f1f5f9;
+    letter-spacing: -0.03em;
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+}
+
+.activityLabel {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ─── Section header ──────────────────────────────────────────────────────── */
+
+.sectionTitle {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #818cf8;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 2px;
+}
+
+.sectionTitle::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.3) 0%, transparent 100%);
+}
+
+/* ─── Personal Records list ───────────────────────────────────────────────── */
+
+.prList {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: linear-gradient(180deg, #12131c 0%, #0d0e14 100%);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.prItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    transition: background 0.2s;
+    cursor: default;
+}
+
+.prItem+.prItem {
+    border-top: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+.prItem:hover {
+    background: rgba(99, 102, 241, 0.06);
+}
+
+.prLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.prMuscle {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #6366f1;
+    font-family: 'Inter', sans-serif;
+}
+
+.prExercise {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+}
+
+.prRight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.prMetric {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.prValue {
+    font-size: 16px;
+    font-weight: 800;
+    color: #f1f5f9;
+    letter-spacing: -0.02em;
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+}
+
+.prUnit {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.prReps {
+    font-size: 10px;
+    font-weight: 700;
+    color: #a5b4fc;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    padding: 2px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: center;
+    min-width: 64px;
+    box-sizing: border-box;
+}
+
+/* prBestBadge removed — trophy moved to section title */
+
+/* ─── Edit Profile Modal ──────────────────────────────────────────────────── */
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: overlayIn 0.2s ease;
+}
+
+@keyframes overlayIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.editModal {
+    background: linear-gradient(180deg, #13141f 0%, #0f1017 100%);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 24px;
+    padding: 24px 20px 28px;
+    width: 100%;
+    max-width: 440px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    animation: modalIn 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(99, 102, 241, 0.15);
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* modalHandle removed — modal is now centered, not a bottom sheet */
+
+.modalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.modalTitle {
+    font-size: 18px;
+    font-weight: 800;
+    color: #f1f5f9;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+}
+
+.modalCloseBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.modalCloseBtn:hover {
+    background: rgba(99, 102, 241, 0.2);
+    color: #c7d2fe;
+}
+
+/* ─── Edit form ───────────────────────────────────────────────────────────── */
+
+.editForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.fieldGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.fieldRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.fieldLabel {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4b5563;
+    font-family: 'Inter', sans-serif;
+    padding-left: 2px;
+}
+
+.fieldInput {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: #e2e8f0;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+}
+
+.fieldInput::placeholder {
+    color: #374151;
+}
+
+.fieldInput:focus {
+    border-color: rgba(99, 102, 241, 0.6);
+    background: rgba(99, 102, 241, 0.06);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.fieldSelect {
+    appearance: none;
+    /* Solid background so the browser dropdown sheet doesn't bleed through */
+    background-color: #13141f;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+/* Style the native option list as dark as browsers allow */
+.fieldSelect option {
+    background-color: #13141f;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
+.weightRow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+}
+
+.unitToggle {
+    display: flex;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.unitBtn {
+    padding: 0 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #4b5563;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.04em;
+}
+
+.unitBtnActive {
+    background: rgba(99, 102, 241, 0.25);
+    color: #c7d2fe;
+}
+
+.modalActions {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.cancelBtn {
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.cancelBtn:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #9ca3af;
+}
+
+.saveBtn {
+    padding: 14px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border: none;
+    border-radius: 14px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.01em;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+}
+
+.saveBtn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(99, 102, 241, 0.45);
+}
+
+.saveBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ─── Skeleton loading ────────────────────────────────────────────────────── */
+
+@keyframes shimmer {
+    0% {
+        background-position: -400px 0;
+    }
+
+    100% {
+        background-position: 400px 0;
+    }
+}
+
+.skeleton {
+    border-radius: 10px;
+    background: linear-gradient(90deg, #1a1d2e 25%, #232640 50%, #1a1d2e 75%);
+    background-size: 800px 100%;
+    animation: shimmer 1.4s infinite linear;
+}
+
+.skeletonHeroCard {
+    height: 124px;
+    border-radius: 20px;
+}
+
+.skeletonActivityRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.skeletonActivityCard {
+    height: 100px;
+    border-radius: 16px;
+}
+
+.skeletonPrItem {
+    height: 68px;
+    border-radius: 0;
+}
+
+/* Wrapper for PR skeleton — replaces inline style on the prList */
+.skeletonPrContainer {
+    background: transparent;
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.skeletonPrItem:first-child {
+    border-radius: 16px 16px 0 0;
+}
+
+.skeletonPrItem:last-child {
+    border-radius: 0 0 16px 16px;
+}
+
+/* ─── Micro animations ────────────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.heroCard,
+.activityRow,
+.prList {
+    animation: fadeInUp 0.3s ease;
+}

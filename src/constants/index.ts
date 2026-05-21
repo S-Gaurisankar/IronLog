@@ -2,3 +2,4 @@ export * from './login.constants'; // Ensure login.constants.ts exists and has v
 export * from './navbar.constants';
 export * from './logs.constants';
 export * from './create.constants';
+export * from './profile.constants';
