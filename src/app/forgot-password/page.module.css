@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* ─── Container ──────────────────────────────────────────────────────────── */
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1428 100%);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+/* ─── Card ───────────────────────────────────────────────────────────────── */
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 24px;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 1px rgba(148, 163, 184, 0.1) inset,
+    inset 0 0 60px rgba(99, 102, 241, 0.05);
+  padding: clamp(28px, 6vw, 48px) clamp(18px, 5vw, 36px);
+  color: #e2e8f0;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Brand / Logo ───────────────────────────────────────────────────────── */
+
+.brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 18px);
+  margin-bottom: clamp(18px, 4vw, 28px);
+}
+
+.logo {
+  width: clamp(44px, 8vw, 56px);
+  height: clamp(44px, 8vw, 56px);
+  min-width: clamp(44px, 8vw, 56px);
+  min-height: clamp(44px, 8vw, 56px);
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  box-shadow:
+    0 8px 24px rgba(99, 102, 241, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 2.0rem;
+  font-weight: 700;
+  letter-spacing: 0.021em;
+  color: #f1f5f9;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+/* ─── Page header ────────────────────────────────────────────────────────── */
+
+.pageHeader {
+  text-align: center;
+  margin-bottom: clamp(20px, 3vw, 32px);
+  padding-bottom: clamp(16px, 2vw, 24px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.12);
+}
+
+.pageTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 6px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.pageSubtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ─── Form ───────────────────────────────────────────────────────────────── */
+
+.form {
+  display: grid;
+  gap: clamp(14px, 2vw, 20px);
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: #b2bdcb;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+
+.fieldError {
+  font-size: 0.75rem;
+  color: #f87171;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: errorFadeIn 0.2s ease;
+}
+
+@keyframes errorFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.inputError {
+  border-color: rgba(248, 113, 113, 0.5) !important;
+  background: rgba(248, 113, 113, 0.04) !important;
+}
+
+.inputError:focus {
+  border-color: rgba(248, 113, 113, 0.7) !important;
+  box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.12) !important;
+}
+
+/* ─── Input wrapper ──────────────────────────────────────────────────────── */
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  color: #64748b;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 12px;
+  background: rgba(226, 232, 240, 0.08);
+  color: #f1f5f9;
+  padding: 14px 16px 14px 44px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+.input::placeholder {
+  color: rgba(148, 163, 184, 0.6);
+}
+
+.input:focus {
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(99, 102, 241, 0.05);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+/* ─── Submit button ──────────────────────────────────────────────────────── */
+
+.button {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 2px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.button:disabled::before {
+  display: none;
+}
+
+.submitContainer {
+  position: relative;
+  width: 100%;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  color: #e2e8f0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: normal;
+  max-width: 280px;
+  width: max-content;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  z-index: 50;
+  text-align: left;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(15, 23, 42, 0.95) transparent transparent transparent;
+}
+
+.submitContainer:hover .tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ─── Footer / Back link ─────────────────────────────────────────────────── */
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.2), transparent);
+  margin: 24px 0;
+}
+
+.footer {
+  text-align: center;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #6366f1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+.backLink:hover {
+  color: #818cf8;
+  background: rgba(99, 102, 241, 0.1);
+}
+
+/* ─── Success state ──────────────────────────────────────────────────────── */
+
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 8px 0;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.successIconWrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  display: grid;
+  place-items: center;
+  color: #818cf8;
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
+  margin-bottom: 8px;
+}
+
+.successTitle {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.successMessage {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.resendRow {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 4px 0 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+.resendBtn {
+  background: none;
+  border: none;
+  color: #6366f1;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+  font-family: inherit;
+}
+
+.resendBtn:hover {
+  color: #818cf8;
+}

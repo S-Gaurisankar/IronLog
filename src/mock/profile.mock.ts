@@ -5,6 +5,7 @@ import type { UserProfile } from 'src/types';
 
 const MOCK_PROFILE: UserProfile = {
     display_name: 'Alex Miller',
+    username: 'alexmiller',
     age: 28,
     gender: 'Male',
     weight: 195,
