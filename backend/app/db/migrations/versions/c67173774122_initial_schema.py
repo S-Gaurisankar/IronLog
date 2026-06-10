@@ -1,7 +1,7 @@
 """initial_schema
 
 Revision ID: c67173774122
-Revises: b62026c5726c
+Revises: 
 Create Date: 2026-06-01 23:16:07.602006
 
 """
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision: str = 'c67173774122'
-down_revision: Union[str, Sequence[str], None] = 'b62026c5726c'
+down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
@@ -31,7 +31,7 @@ def upgrade() -> None:
     sa.Column('gender', sa.String(), nullable=True),
     sa.Column('weight', sa.Float(), nullable=True),
     sa.Column('weight_unit', sa.String(), nullable=False),
-    sa.Column('height', sa.Integer(), nullable=True),
+    sa.Column('height', sa.String(), nullable=True),
     sa.Column('avatar_url', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
