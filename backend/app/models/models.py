@@ -21,8 +21,8 @@ class User(Base):
     age = Column(Integer, nullable=True)
     gender = Column(String, nullable=True)
     weight = Column(Float, nullable=True)
-    weight_unit = Column(String, default="kgs", nullable=False)  # "lbs" or "kg"
-    height = Column(Integer, nullable=True)  # Format: "6'1\"" or "185 cm"
+    weight_unit = Column(String, default="kg", nullable=False)  # "lbs" or "kg"
+    height = Column(String, nullable=True)  # Format: "6'1\"" or "185 cm"
     avatar_url = Column(String, nullable=True)
     
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
