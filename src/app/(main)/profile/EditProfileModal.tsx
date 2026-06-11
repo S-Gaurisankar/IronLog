@@ -10,6 +10,7 @@ import EditProfileWeight from './EditProfile/EditProfileWeight';
 interface EditProfileModalProps {
     fields: EditableProfileFields;
     isSaving: boolean;
+    saveError: string | null;
     onFieldChange: (key: keyof EditableProfileFields, value: string) => void;
     onSave: () => void;
     onCancel: () => void;
@@ -18,6 +19,7 @@ interface EditProfileModalProps {
 export default function EditProfileModal({
     fields,
     isSaving,
+    saveError,
     onFieldChange,
     onSave,
     onCancel,
@@ -106,23 +108,28 @@ export default function EditProfileModal({
                     />
 
                     <div className={styles.modalActions}>
-                        <button
-                            type="button"
-                            id="edit-cancel-btn"
-                            className={styles.cancelBtn}
-                            onClick={onCancel}
-                            disabled={isSaving}
-                        >
-                            {PROFILE_CONSTANTS.BTN_CANCEL}
-                        </button>
-                        <button
-                            type="submit"
-                            id="edit-save-btn"
-                            className={styles.saveBtn}
-                            disabled={isSaving}
-                        >
-                            {isSaving ? PROFILE_CONSTANTS.BTN_SAVING : PROFILE_CONSTANTS.BTN_SAVE}
-                        </button>
+                        {saveError && (
+                            <p className={styles.saveError}>{saveError}</p>
+                        )}
+                        <div className={styles.modalActionBtns}>
+                            <button
+                                type="button"
+                                id="edit-cancel-btn"
+                                className={styles.cancelBtn}
+                                onClick={onCancel}
+                                disabled={isSaving}
+                            >
+                                {PROFILE_CONSTANTS.BTN_CANCEL}
+                            </button>
+                            <button
+                                type="submit"
+                                id="edit-save-btn"
+                                className={styles.saveBtn}
+                                disabled={isSaving}
+                            >
+                                {isSaving ? PROFILE_CONSTANTS.BTN_SAVING : PROFILE_CONSTANTS.BTN_SAVE}
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

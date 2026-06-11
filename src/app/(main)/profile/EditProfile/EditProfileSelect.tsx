@@ -83,7 +83,6 @@ export default function EditProfileSelect({
                         aria-labelledby={id}
                     >
                         <li
-                            key=""
                             role="option"
                             aria-selected={value === ''}
                             className={`${styles.customSelectOption} ${value === '' ? styles.customSelectOptionActive : ''}`}

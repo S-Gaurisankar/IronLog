@@ -37,6 +37,7 @@ export default function ProfileHero({ profile, onEditClick }: ProfileHeroProps) 
             // Best-effort — clear local state regardless
         }
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         router.push('/login');
     }
 

@@ -9,6 +9,7 @@ export function useProfile() {
     const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [saveError, setSaveError] = useState<string | null>(null);
     const [editFields, setEditFields] = useState<EditableProfileFields | null>(null);
 
     useEffect(() => {
@@ -24,6 +25,7 @@ export function useProfile() {
 
     const startEditing = useCallback(() => {
         if (!profile) return;
+        setSaveError(null);
         setEditFields({
             display_name: profile.display_name,
             username: profile.username,
@@ -39,6 +41,7 @@ export function useProfile() {
     const cancelEditing = useCallback(() => {
         setIsEditing(false);
         setEditFields(null);
+        setSaveError(null);
     }, []);
 
     const updateField = useCallback(
@@ -51,11 +54,15 @@ export function useProfile() {
     const saveProfile = useCallback(async () => {
         if (!editFields) return;
         setIsSaving(true);
+        setSaveError(null);
         try {
             const updated = await profileApi.updateProfile(editFields);
             setProfile(updated);
             setIsEditing(false);
             setEditFields(null);
+        } catch (err: unknown) {
+            const msg = err instanceof Error ? err.message : 'Failed to save profile.';
+            setSaveError(msg);
         } finally {
             setIsSaving(false);
         }
@@ -66,6 +73,7 @@ export function useProfile() {
         loading,
         isEditing,
         isSaving,
+        saveError,
         editFields,
         startEditing,
         cancelEditing,

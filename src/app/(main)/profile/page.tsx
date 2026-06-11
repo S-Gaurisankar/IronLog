@@ -14,6 +14,7 @@ export default function ProfilePage() {
         loading,
         isEditing,
         isSaving,
+        saveError,
         editFields,
         startEditing,
         cancelEditing,
@@ -40,6 +41,7 @@ export default function ProfilePage() {
                 <EditProfileModal
                     fields={editFields}
                     isSaving={isSaving}
+                    saveError={saveError}
                     onFieldChange={updateField}
                     onSave={saveProfile}
                     onCancel={cancelEditing}
