@@ -60,4 +60,6 @@ export const PROFILE_CONSTANTS = {
     BTN_CANCEL: 'Cancel',
     BTN_SAVE: 'Save Changes',
     BTN_SAVING: 'Saving…',
+    LOGOUT_BTN: 'Log out',
+    LOGOUT_BTN_ARIA: 'Log out of IronLog',
 };
