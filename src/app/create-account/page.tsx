@@ -14,6 +14,8 @@ import {
     EyeIcon,
     EyeOffIcon,
 } from 'src/assets';
+import { useAuth } from 'src/contexts/AuthContext';
+import { ApiError } from 'src/api/client';
 
 // ─── Static renderers ──────────────────────────────────────────────────────
 
@@ -201,6 +203,10 @@ export default function CreateAccount() {
         password: '',
         confirmPassword: '',
     });
+    
+    const { signup } = useAuth();
+    const [apiError, setApiError] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [touched, setTouched] = useState<Partial<Record<keyof CreateAccountFormData, boolean>>>({});
 
@@ -221,10 +227,28 @@ export default function CreateAccount() {
         Object.entries(errors).filter(([field]) => touched[field as keyof CreateAccountFormData])
     );
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isValid) return;
-        // Proceed with account creation logic
+        
+        setApiError(null);
+        setIsSubmitting(true);
+        try {
+            await signup({
+                email: formData.email,
+                username: formData.username,
+                password: formData.password,
+                display_name: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
+            });
+        } catch (error) {
+            if (error instanceof ApiError) {
+                setApiError(error.message);
+            } else {
+                setApiError('An unexpected error occurred. Please try again.');
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -234,6 +258,7 @@ export default function CreateAccount() {
                 <div className={styles.pageHeader}>
                     <h2 className={styles.pageTitle}>{CREATE_ACCOUNT_CONSTANTS.PAGE_TITLE}</h2>
                 </div>
+                {apiError && <div style={{ color: 'red', textAlign: 'center', marginBottom: '1rem', fontSize: '0.9rem' }}>{apiError}</div>}
                 <form className={styles.form} onSubmit={handleSubmit}>
                     {renderNameRow({
                         firstName: formData.firstName,
@@ -292,7 +317,7 @@ export default function CreateAccount() {
                         onBlur={handleBlur}
                         autoComplete="new-password"
                     />
-                    {renderSubmitButton(!isValid, errors)}
+                    {renderSubmitButton(!isValid || isSubmitting, errors)}
                 </form>
                 {renderFooter()}
             </div>

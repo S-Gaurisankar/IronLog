@@ -54,10 +54,10 @@ function editButton(onEditClick: () => void) {
 
 export default function ProfileHero({ profile, onEditClick }: ProfileHeroProps) {
     const stats = [
-        { label: PROFILE_CONSTANTS.STAT_AGE, value: profile.age },
-        { label: PROFILE_CONSTANTS.STAT_GENDER, value: profile.gender },
-        { label: PROFILE_CONSTANTS.STAT_WEIGHT, value: profile.weight, unit: profile.weight_unit },
-        { label: PROFILE_CONSTANTS.STAT_HEIGHT, value: profile.height },
+        { label: PROFILE_CONSTANTS.STAT_AGE, value: profile.age ?? '—' },
+        { label: PROFILE_CONSTANTS.STAT_GENDER, value: profile.gender ?? '—' },
+        { label: PROFILE_CONSTANTS.STAT_WEIGHT, value: profile.weight ?? '—', unit: profile.weight ? profile.weight_unit : undefined },
+        { label: PROFILE_CONSTANTS.STAT_HEIGHT, value: profile.height ?? '—' },
     ];
 
     return (

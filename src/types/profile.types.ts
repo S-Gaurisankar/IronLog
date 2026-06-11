@@ -14,11 +14,11 @@ export interface PersonalRecord {
 export interface UserProfile {
     username: string;
     display_name: string;
-    age: number;
-    gender: string;
-    weight: number;
+    age: number | null;
+    gender: string | null;
+    weight: number | null;
     weight_unit: WeightUnit;
-    height: string; // e.g. "6'1\"" or "185 cm"
+    height: string | null; // e.g. "6'1\"" or "185 cm"
     avatar_url?: string;
     personal_records: PersonalRecord[];
     total_workouts: number;

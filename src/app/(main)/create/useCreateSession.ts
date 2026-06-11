@@ -1,10 +1,16 @@
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { MuscleGroup, ModalConfig } from './types';
 import { CREATE_CONSTANTS } from 'src/constants';
+import { sessionsApi } from 'src/api/sessions';
+import { ApiError } from 'src/api/client';
 
 export const useCreateSession = () => {
+    const router = useRouter();
     const [modalConfig, setModalConfig] = useState<ModalConfig | null>(null);
     const [muscleGroups, setMuscleGroups] = useState<MuscleGroup[]>([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     const handleUpdateMuscleGroup = (mgId: string, name: string) => {
         setMuscleGroups(prev => prev.map(mg => mg.id === mgId ? { ...mg, name } : mg));
@@ -171,6 +177,46 @@ export const useCreateSession = () => {
         return formattedDate;
     };
 
+    const toIsoDate = (d: Date): string =>
+        `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+    const submitSession = async () => {
+        if (!muscleGroups.length) return;
+
+        setSubmitError(null);
+        setIsSubmitting(true);
+
+        const payload = {
+            workout_date: toIsoDate(new Date()),
+            muscle_groups: muscleGroups.map((mg, mgIdx) => ({
+                name: mg.name,
+                order: mgIdx + 1,
+                exercises: mg.exercises.map((ex, exIdx) => ({
+                    name: ex.name,
+                    order: exIdx + 1,
+                    sets: ex.sets.map((s, sIdx) => ({
+                        weight: parseFloat(s.kg) || 0,
+                        reps: parseInt(s.reps, 10) || 0,
+                        order: sIdx + 1,
+                    })),
+                })),
+            })),
+        };
+
+        try {
+            await sessionsApi.createSession(payload);
+            router.push('/logs');
+        } catch (err) {
+            if (err instanceof ApiError) {
+                setSubmitError(err.message);
+            } else {
+                setSubmitError('An unexpected error occurred. Please try again.');
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return {
         muscleGroups,
         modalConfig,
@@ -185,6 +231,9 @@ export const useCreateSession = () => {
         handleRemoveSet,
         confirmModalAction,
         getModalText,
-        getDateHeader
+        getDateHeader,
+        submitSession,
+        isSubmitting,
+        submitError,
     };
 };

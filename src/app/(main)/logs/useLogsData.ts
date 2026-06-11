@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { fetchLogsData } from 'src/mock/logs.mock';
+import { logsApi } from 'src/api/logs';
 import type { LogsData, UseLogsDataReturn } from 'src/types';
 import { toIso } from './useCalendar';
 
@@ -16,7 +16,7 @@ export function useLogsData(
     const load = useCallback(async (year: number, month: number, day: number) => {
         setLoading(true);
         try {
-            const result = await fetchLogsData(toIso(year, month, day));
+            const result = await logsApi.getLogsByDate(toIso(year, month, day));
             setData(result);
         } finally {
             setLoading(false);

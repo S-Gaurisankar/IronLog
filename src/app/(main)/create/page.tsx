@@ -72,6 +72,9 @@ export default function CreateSessionPage() {
         confirmModalAction,
         getModalText,
         getDateHeader,
+        submitSession,
+        isSubmitting,
+        submitError,
     } = useCreateSession();
 
     if (!muscleGroups.length) {
@@ -105,9 +108,18 @@ export default function CreateSessionPage() {
             }
 
             <div className={styles.floatingActionContainer}>
-                <button className={styles.finalizeBtn}>
+                {submitError && (
+                    <p style={{ color: 'red', fontSize: '0.85rem', marginBottom: '0.5rem', textAlign: 'center' }}>
+                        {submitError}
+                    </p>
+                )}
+                <button
+                    className={styles.finalizeBtn}
+                    onClick={submitSession}
+                    disabled={isSubmitting}
+                >
                     <span className={styles.finalizeIcon}><CheckCircleSolidIcon /></span>
-                    {CREATE_CONSTANTS.FINALIZE_BTN}
+                    {isSubmitting ? 'Saving…' : CREATE_CONSTANTS.FINALIZE_BTN}
                 </button>
             </div>
 

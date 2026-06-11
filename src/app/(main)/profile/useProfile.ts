@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import type { UserProfile, EditableProfileFields } from 'src/types';
-import { fetchProfileData, updateProfileData } from 'src/mock/profile.mock';
+import { profileApi } from 'src/api/profile';
 
 export function useProfile() {
     const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -12,10 +12,14 @@ export function useProfile() {
     const [editFields, setEditFields] = useState<EditableProfileFields | null>(null);
 
     useEffect(() => {
-        fetchProfileData().then((data) => {
-            setProfile(data);
-            setLoading(false);
-        });
+        profileApi.getProfile()
+            .then((data) => {
+                setProfile(data);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
+            });
     }, []);
 
     const startEditing = useCallback(() => {
@@ -23,11 +27,11 @@ export function useProfile() {
         setEditFields({
             display_name: profile.display_name,
             username: profile.username,
-            age: String(profile.age),
-            gender: profile.gender,
-            weight: String(profile.weight),
+            age: profile.age != null ? String(profile.age) : '',
+            gender: profile.gender ?? '',
+            weight: profile.weight != null ? String(profile.weight) : '',
             weight_unit: profile.weight_unit,
-            height: profile.height,
+            height: profile.height ?? '',
         });
         setIsEditing(true);
     }, [profile]);
@@ -48,15 +52,7 @@ export function useProfile() {
         if (!editFields) return;
         setIsSaving(true);
         try {
-            const updated = await updateProfileData({
-                display_name: editFields.display_name,
-                username: editFields.username,
-                age: Number(editFields.age),
-                gender: editFields.gender,
-                weight: Number(editFields.weight),
-                weight_unit: editFields.weight_unit,
-                height: editFields.height,
-            });
+            const updated = await profileApi.updateProfile(editFields);
             setProfile(updated);
             setIsEditing(false);
             setEditFields(null);
