@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int
     PROJECT_NAME: str = "IronLog API"
     API_V1_STR: str = "/api/v1"
-    BACKEND_CORS_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
+    BACKEND_CORS_ORIGINS: str 
     model_config = SettingsConfigDict(env_file=str(_ENV_FILE), extra="ignore")
 
 settings = Settings()
