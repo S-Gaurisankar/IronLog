@@ -1,10 +1,10 @@
 export const NAVBAR_CONSTANTS = {
     HUB: 'Hub',
     LOG: 'Logs',
-    CREATE: 'Create',
+    CREATE: 'Track',
     PROFILE: 'Profile',
     HUB_HREF: '/hub',
     LOG_HREF: '/logs',
-    CREATE_HREF: '/create',
+    TRACK_HREF: '/track',
     PROFILE_HREF: '/profile',
 };

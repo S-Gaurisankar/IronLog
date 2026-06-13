@@ -1,4 +1,4 @@
-export const CREATE_CONSTANTS = {
+export const TRACK_CONSTANTS = {
     ADD_EXERCISE_BTN: 'Add Exercise',
     ADD_MUSCLE_GROUP_BTN: 'Add Muscle Group',
     ADD_SET_BTN: 'ADD SET',

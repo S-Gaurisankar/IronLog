@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './page.module.css';
 import { TrashIcon, PlusIcon } from 'src/assets';
-import { CREATE_CONSTANTS } from 'src/constants';
+import { TRACK_CONSTANTS } from 'src/constants';
 import { MuscleGroup } from './types';
 import ExerciseCard from './ExerciseCard';
 
@@ -27,10 +27,10 @@ interface MuscleGroupHeaderProps {
 const MuscleGroupHeader = ({ onRemoveRequest, onUpdateName, mg }: MuscleGroupHeaderProps) => (
     <>
         <div className={styles.cardHeader}>
-            <span className={styles.cardTitle}>{CREATE_CONSTANTS.MUSCLE_GROUP_LABEL}</span>
+            <span className={styles.cardTitle}>{TRACK_CONSTANTS.MUSCLE_GROUP_LABEL}</span>
             <button
                 className={`${styles.iconButton} ${styles.parentTrashBtn}`}
-                aria-label={CREATE_CONSTANTS.ARIA_REMOVE_MUSCLE_GROUP}
+                aria-label={TRACK_CONSTANTS.ARIA_REMOVE_MUSCLE_GROUP}
                 onClick={() => onRemoveRequest(mg.id)}
             >
                 <TrashIcon />
@@ -42,7 +42,7 @@ const MuscleGroupHeader = ({ onRemoveRequest, onUpdateName, mg }: MuscleGroupHea
                 className={styles.inputField}
                 value={mg.name}
                 onChange={(e) => onUpdateName(mg.id, e.target.value)}
-                placeholder={CREATE_CONSTANTS.PLACEHOLDER_MUSCLE_GROUP}
+                placeholder={TRACK_CONSTANTS.PLACEHOLDER_MUSCLE_GROUP}
             />
         </div>
     </>
@@ -87,7 +87,7 @@ export default function MuscleGroupCard({
                 className={styles.addInnerExerciseBtn}
                 onClick={() => handleAddExercise(mg.id)}
             >
-                <PlusIcon /> {CREATE_CONSTANTS.ADD_EXERCISE_BTN}
+                <PlusIcon /> {TRACK_CONSTANTS.ADD_EXERCISE_BTN}
             </button>
         </div>
     );

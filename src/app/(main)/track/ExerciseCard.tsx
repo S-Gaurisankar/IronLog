@@ -1,6 +1,6 @@
 import React from 'react';
 import { TrashIcon, CloseIcon, PlusIcon } from 'src/assets';
-import { CREATE_CONSTANTS } from 'src/constants';
+import { TRACK_CONSTANTS } from 'src/constants';
 import { WeightRepsField, Exercise, WorkoutSet } from './types';
 import styles from './page.module.css';
 
@@ -32,18 +32,18 @@ interface SetsTableProps {
 
 //Config
 const weightRepsFields: WeightRepsField[] = [
-    { key: 'kg', placeholder: '0', label: CREATE_CONSTANTS.KG_LABEL },
-    { key: 'reps', placeholder: '0', label: CREATE_CONSTANTS.REPS_LABEL },
+    { key: 'kg', placeholder: '0', label: TRACK_CONSTANTS.KG_LABEL },
+    { key: 'reps', placeholder: '0', label: TRACK_CONSTANTS.REPS_LABEL },
 ];
 
 
 //Render
 const ExerciseHeader = ({ onRemove }: { onRemove: () => void }) => (
     <div className={styles.exerciseCardHeader}>
-        <span className={styles.exerciseName}>{CREATE_CONSTANTS.EXERCISE_NAME_LABEL}</span>
+        <span className={styles.exerciseName}>{TRACK_CONSTANTS.EXERCISE_NAME_LABEL}</span>
         <button
             className={styles.iconButton}
-            aria-label={CREATE_CONSTANTS.ARIA_REMOVE_EXERCISE}
+            aria-label={TRACK_CONSTANTS.ARIA_REMOVE_EXERCISE}
             onClick={onRemove}
         >
             <TrashIcon />
@@ -57,7 +57,7 @@ const ExerciseInput = ({ value, onChange }: { value: string; onChange: (val: str
         className={styles.inputField}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={CREATE_CONSTANTS.PLACEHOLDER_EXERCISE}
+        placeholder={TRACK_CONSTANTS.PLACEHOLDER_EXERCISE}
     />
 );
 
@@ -77,7 +77,7 @@ const SetRow = ({ index, set, onUpdate, onRemove }: SetRowProps) => (
         ))}
         <button
             className={styles.removeSetBtn}
-            aria-label={CREATE_CONSTANTS.ARIA_REMOVE_SET}
+            aria-label={TRACK_CONSTANTS.ARIA_REMOVE_SET}
             onClick={onRemove}
         >
             <CloseIcon />
@@ -88,7 +88,7 @@ const SetRow = ({ index, set, onUpdate, onRemove }: SetRowProps) => (
 const SetsTable = ({ exercise, onUpdateSet, onRemoveSet, onAddSet }: SetsTableProps) => (
     <div className={styles.setsTable}>
         <div className={styles.tableHeader}>
-            <span>{CREATE_CONSTANTS.SET_LABEL}</span>
+            <span>{TRACK_CONSTANTS.SET_LABEL}</span>
             {weightRepsFields.map(({ key, label }) => (
                 <span key={key}>{label}</span>
             ))}
@@ -109,7 +109,7 @@ const SetsTable = ({ exercise, onUpdateSet, onRemoveSet, onAddSet }: SetsTablePr
             className={styles.addSetButton}
             onClick={onAddSet}
         >
-            <PlusIcon /> {CREATE_CONSTANTS.ADD_SET_BTN}
+            <PlusIcon /> {TRACK_CONSTANTS.ADD_SET_BTN}
         </button>
     </div>
 );

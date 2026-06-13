@@ -2,8 +2,8 @@
 
 import styles from './page.module.css';
 import { PlusCircleSolidIcon, CheckCircleSolidIcon, DumbbellIcon } from 'src/assets';
-import { CREATE_CONSTANTS } from 'src/constants';
-import { useCreateSession } from './useCreateSession';
+import { TRACK_CONSTANTS } from 'src/constants';
+import { useTrackSession } from './useTrackSession';
 import MuscleGroupCard from './MuscleGroupCard';
 import ConfirmModal from './ConfirmModal';
 
@@ -27,7 +27,7 @@ interface EmptyStateProps {
 const AddMuscleGroupBtn = ({ handleAddMuscleGroup }: AddMuscleGroupBtnProps) => (
     <button className={styles.addMuscleGroupBtn} onClick={handleAddMuscleGroup}>
         <span className={styles.addExerciseIcon}><PlusCircleSolidIcon /></span>
-        {CREATE_CONSTANTS.ADD_MUSCLE_GROUP_BTN}
+        {TRACK_CONSTANTS.ADD_MUSCLE_GROUP_BTN}
     </button>
 );
 
@@ -38,7 +38,7 @@ const CreateSessionHeader = ({
     <header className={styles.header}>
         <div className={styles.headerTextWrapper}>
             <h1 className={styles.dateTitle}>{getDateHeader()}</h1>
-            <span className={styles.subtitle}>{CREATE_CONSTANTS.SUBTITLE}</span>
+            <span className={styles.subtitle}>{TRACK_CONSTANTS.SUBTITLE}</span>
         </div>
         <AddMuscleGroupBtn handleAddMuscleGroup={handleAddMuscleGroup} />
     </header>
@@ -47,16 +47,16 @@ const CreateSessionHeader = ({
 const EmptyState = ({ onAdd }: EmptyStateProps) => (
     <div className={styles.emptyState}>
         <span className={styles.emptyIcon}><DumbbellIcon /></span>
-        <p className={styles.emptyTitle}>{CREATE_CONSTANTS.EMPTY_STATE_HEADING}</p>
+        <p className={styles.emptyTitle}>{TRACK_CONSTANTS.EMPTY_STATE_HEADING}</p>
         <p className={styles.emptySubtitle}>
-            {CREATE_CONSTANTS.EMPTY_STATE_SUBHEADING}
+            {TRACK_CONSTANTS.EMPTY_STATE_SUBHEADING}
         </p>
         <AddMuscleGroupBtn handleAddMuscleGroup={onAdd} />
     </div>
 );
 
 
-export default function CreateSessionPage() {
+export default function TrackSessionPage() {
     const {
         muscleGroups,
         modalConfig,
@@ -75,7 +75,7 @@ export default function CreateSessionPage() {
         submitSession,
         isSubmitting,
         submitError,
-    } = useCreateSession();
+    } = useTrackSession();
 
     if (!muscleGroups.length) {
         return (
@@ -119,7 +119,7 @@ export default function CreateSessionPage() {
                     disabled={isSubmitting}
                 >
                     <span className={styles.finalizeIcon}><CheckCircleSolidIcon /></span>
-                    {isSubmitting ? 'Saving…' : CREATE_CONSTANTS.FINALIZE_BTN}
+                    {isSubmitting ? 'Saving…' : TRACK_CONSTANTS.FINALIZE_BTN}
                 </button>
             </div>
 

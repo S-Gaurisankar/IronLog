@@ -15,7 +15,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
     // { label: NAVBAR_CONSTANTS.HUB, href: NAVBAR_CONSTANTS.HUB_HREF, icon: <HubIcon /> },
     { label: NAVBAR_CONSTANTS.LOG, href: NAVBAR_CONSTANTS.LOG_HREF, icon: <LogIcon /> },
-    { label: NAVBAR_CONSTANTS.CREATE, href: NAVBAR_CONSTANTS.CREATE_HREF, icon: <CreateIcon /> },
+    { label: NAVBAR_CONSTANTS.CREATE, href: NAVBAR_CONSTANTS.TRACK_HREF, icon: <CreateIcon /> },
     { label: NAVBAR_CONSTANTS.PROFILE, href: NAVBAR_CONSTANTS.PROFILE_HREF, icon: <ProfileIcon /> },
 ];
 

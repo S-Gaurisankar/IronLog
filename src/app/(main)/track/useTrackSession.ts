@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MuscleGroup, ModalConfig } from './types';
-import { CREATE_CONSTANTS } from 'src/constants';
+import { TRACK_CONSTANTS } from 'src/constants';
 import { sessionsApi } from 'src/api/sessions';
 import { ApiError } from 'src/api/client';
 
-export const useCreateSession = () => {
+export const useTrackSession = () => {
     const router = useRouter();
     const [modalConfig, setModalConfig] = useState<ModalConfig | null>(null);
     const [muscleGroups, setMuscleGroups] = useState<MuscleGroup[]>([]);
@@ -161,9 +161,9 @@ export const useCreateSession = () => {
 
     const getModalText = () => {
         if (!modalConfig) return { title: '', text: '' };
-        if (modalConfig.type === 'muscleGroup') return { title: CREATE_CONSTANTS.MODAL_DELETE_TITLE, text: CREATE_CONSTANTS.MODAL_DELETE_TEXT };
-        if (modalConfig.type === 'lastExercise') return { title: CREATE_CONSTANTS.MODAL_LAST_EX_TITLE, text: CREATE_CONSTANTS.MODAL_LAST_EX_TEXT };
-        return { title: CREATE_CONSTANTS.MODAL_LAST_SET_TITLE, text: CREATE_CONSTANTS.MODAL_LAST_SET_TEXT };
+        if (modalConfig.type === 'muscleGroup') return { title: TRACK_CONSTANTS.MODAL_DELETE_TITLE, text: TRACK_CONSTANTS.MODAL_DELETE_TEXT };
+        if (modalConfig.type === 'lastExercise') return { title: TRACK_CONSTANTS.MODAL_LAST_EX_TITLE, text: TRACK_CONSTANTS.MODAL_LAST_EX_TEXT };
+        return { title: TRACK_CONSTANTS.MODAL_LAST_SET_TITLE, text: TRACK_CONSTANTS.MODAL_LAST_SET_TEXT };
     };
 
 

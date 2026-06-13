@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './page.module.css';
-import { CREATE_CONSTANTS } from 'src/constants';
+import { TRACK_CONSTANTS } from 'src/constants';
 
 interface ConfirmModalProps {
     title: string;
@@ -13,10 +13,10 @@ function renderModalActions({ onCancel, onConfirm }) {
     return (
         <div className={styles.modalActions}>
             <button className={styles.modalCancelBtn} onClick={onCancel}>
-                {CREATE_CONSTANTS.MODAL_CANCEL_BTN}
+                {TRACK_CONSTANTS.MODAL_CANCEL_BTN}
             </button>
             <button className={styles.modalDeleteBtn} onClick={onConfirm}>
-                {CREATE_CONSTANTS.MODAL_CONFIRM_BTN}
+                {TRACK_CONSTANTS.MODAL_CONFIRM_BTN}
             </button>
         </div>
     )
