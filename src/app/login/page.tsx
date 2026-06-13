@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import styles from './page.module.css';
 import { LOGIN_CONSTANTS } from 'src/constants';
-import { Logo, EmailIcon, PasswordIcon } from 'src/assets';
+import { Logo, EmailIcon, PasswordIcon, EyeIcon, EyeOffIcon } from 'src/assets';
 import { useAuth } from 'src/contexts/AuthContext';
 import { ApiError } from 'src/api/client';
 
@@ -12,6 +12,7 @@ export default function Login() {
   const { login } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,11 +79,18 @@ export default function Login() {
         <input
           id={LOGIN_CONSTANTS.PASSWORD}
           name={LOGIN_CONSTANTS.PASSWORD}
-          type={LOGIN_CONSTANTS.PASSWORD}
+          type={showPassword ? 'text' : 'password'}
           placeholder={LOGIN_CONSTANTS.PASSWORD_PLACEHOLDER}
           className={styles.input}
           required
         />
+        <button
+          type="button"
+          onClick={() => setShowPassword(v => !v)}
+          className={styles.eyeBtn}
+        >
+          {showPassword ? <EyeIcon /> : <EyeOffIcon />}
+        </button>
       </div>
     </div>
   );

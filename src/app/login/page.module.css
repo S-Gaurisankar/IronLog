@@ -180,6 +180,23 @@
   color: #6366f1;
 }
 
+.eyeBtn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #475569;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.eyeBtn:hover {
+  color: #818cf8;
+}
+
 .button {
   width: 100%;
   border: none;

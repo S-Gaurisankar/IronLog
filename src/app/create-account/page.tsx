@@ -162,9 +162,8 @@ function PasswordInputField({
                     type="button"
                     onClick={() => setVisible(v => !v)}
                     className={styles.eyeBtn}
-                    aria-label={visible ? CREATE_ACCOUNT_CONSTANTS.HIDE_PASSWORD_ARIA : CREATE_ACCOUNT_CONSTANTS.SHOW_PASSWORD_ARIA}
                 >
-                    {visible ? <EyeOffIcon /> : <EyeIcon />}
+                    {visible ? <EyeIcon /> : <EyeOffIcon />}
                 </button>
             </div>
             {error && <span className={styles.fieldError}>{error}</span>}
@@ -203,7 +202,7 @@ export default function CreateAccount() {
         password: '',
         confirmPassword: '',
     });
-    
+
     const { signup } = useAuth();
     const [apiError, setApiError] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -230,7 +229,7 @@ export default function CreateAccount() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isValid) return;
-        
+
         setApiError(null);
         setIsSubmitting(true);
         try {
