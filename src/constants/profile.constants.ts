@@ -62,4 +62,8 @@ export const PROFILE_CONSTANTS = {
     BTN_SAVING: 'Saving…',
     LOGOUT_BTN: 'Log out',
     LOGOUT_BTN_ARIA: 'Log out of IronLog',
+    LOGOUT_MODAL_TITLE: 'Log out',
+    LOGOUT_MODAL_TEXT: 'Are you sure you want to log out?',
+    LOGOUT_MODAL_CONFIRM: 'Log out',
+    LOGOUT_MODAL_CANCEL: 'Cancel',
 };

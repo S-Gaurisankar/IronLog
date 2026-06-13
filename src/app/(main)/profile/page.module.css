@@ -798,6 +798,81 @@
     border-radius: 16px 16px 0 0;
 }
 
+/* ─── Confirm Modal ───────────────────────────────────────────────────────── */
+
+.confirmModalContent {
+    background: linear-gradient(180deg, #13141f 0%, #0f1017 100%);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(99, 102, 241, 0.1);
+    animation: modalIn 0.22s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.confirmModalTitle {
+    font-size: 16px;
+    font-weight: 800;
+    color: #f1f5f9;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+}
+
+.confirmModalText {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+}
+
+.confirmModalActions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.confirmModalCancelBtn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.confirmModalCancelBtn:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #94a3b8;
+}
+
+.confirmModalLogoutBtn {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fca5a5;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.confirmModalLogoutBtn:hover {
+    background: rgba(239, 68, 68, 0.22);
+    color: #fecaca;
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
 .skeletonPrItem:last-child {
     border-radius: 0 0 16px 16px;
 }

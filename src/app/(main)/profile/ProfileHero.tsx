@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useRouter } from 'next/navigation';
 import type { UserProfile } from 'src/types';
 import { PROFILE_CONSTANTS } from 'src/constants';
@@ -30,7 +32,9 @@ export default function ProfileHero({ profile, onEditClick }: ProfileHeroProps) 
         { label: PROFILE_CONSTANTS.STAT_HEIGHT, value: profile.height ?? '—' },
     ];
 
-    async function handleLogout() {
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+    async function handleLogoutConfirm() {
         try {
             await authApi.logout();
         } catch {
@@ -73,7 +77,7 @@ export default function ProfileHero({ profile, onEditClick }: ProfileHeroProps) 
                 <button
                     id="logout-btn"
                     className={styles.logoutBtn}
-                    onClick={handleLogout}
+                    onClick={() => setShowLogoutModal(true)}
                     aria-label={PROFILE_CONSTANTS.LOGOUT_BTN_ARIA}
                 >
                     {/* Power-off icon */}
@@ -97,6 +101,28 @@ export default function ProfileHero({ profile, onEditClick }: ProfileHeroProps) 
                 ))}
             </div>
 
+            {showLogoutModal && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.confirmModalContent}>
+                        <h2 className={styles.confirmModalTitle}>{PROFILE_CONSTANTS.LOGOUT_MODAL_TITLE}</h2>
+                        <p className={styles.confirmModalText}>{PROFILE_CONSTANTS.LOGOUT_MODAL_TEXT}</p>
+                        <div className={styles.confirmModalActions}>
+                            <button
+                                className={styles.confirmModalCancelBtn}
+                                onClick={() => setShowLogoutModal(false)}
+                            >
+                                {PROFILE_CONSTANTS.LOGOUT_MODAL_CANCEL}
+                            </button>
+                            <button
+                                className={styles.confirmModalLogoutBtn}
+                                onClick={handleLogoutConfirm}
+                            >
+                                {PROFILE_CONSTANTS.LOGOUT_MODAL_CONFIRM}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
         </div>
     );
