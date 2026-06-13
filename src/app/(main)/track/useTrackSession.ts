@@ -181,7 +181,38 @@ export const useTrackSession = () => {
         `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
     const submitSession = async () => {
-        if (!muscleGroups.length) return;
+        for (const mg of muscleGroups) {
+            if (!mg.name.trim()) {
+                setSubmitError(TRACK_CONSTANTS.ERRORS.NO_MG_NAME);
+                return;
+            }
+            if (!mg.exercises.length) {
+                setSubmitError(TRACK_CONSTANTS.ERRORS.NO_EXERCISES(mg.name));
+                return;
+            }
+            for (const ex of mg.exercises) {
+                if (!ex.name.trim()) {
+                    setSubmitError(TRACK_CONSTANTS.ERRORS.NO_EX_NAME(mg.name));
+                    return;
+                }
+                if (!ex.sets.length) {
+                    setSubmitError(TRACK_CONSTANTS.ERRORS.NO_SETS(ex.name));
+                    return;
+                }
+                for (const set of ex.sets) {
+                    const weight = parseFloat(set.kg);
+                    const reps = parseInt(set.reps, 10);
+                    if (isNaN(weight) || weight <= 0) {
+                        setSubmitError(TRACK_CONSTANTS.ERRORS.INVALID_WEIGHT(ex.name));
+                        return;
+                    }
+                    if (isNaN(reps) || reps < 1) {
+                        setSubmitError(TRACK_CONSTANTS.ERRORS.INVALID_REPS(ex.name));
+                        return;
+                    }
+                }
+            }
+        }
 
         setSubmitError(null);
         setIsSubmitting(true);

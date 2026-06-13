@@ -33,4 +33,13 @@ export const TRACK_CONSTANTS = {
     REPS_LABEL: 'REPS',
     SET_LABEL: 'SET',
     SUBTITLE: 'LOCK-IN TIME!',
+
+    ERRORS: {
+        NO_MG_NAME: 'Please provide a name for all muscle groups.',
+        NO_EXERCISES: (mgName: string) => `Please add at least one exercise for ${mgName}.`,
+        NO_EX_NAME: (mgName: string) => `Please provide a name for all exercises under ${mgName}.`,
+        NO_SETS: (exName: string) => `Please add at least one set for ${exName}.`,
+        INVALID_WEIGHT: (exName: string) => `Please enter a valid weight (greater than 0) for ${exName}.`,
+        INVALID_REPS: (exName: string) => `Please enter valid reps (at least 1) for ${exName}.`,
+    },
 };
