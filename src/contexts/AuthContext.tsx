@@ -46,7 +46,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(res.user);
             localStorage.setItem('token', res.access_token);
             localStorage.setItem('user', JSON.stringify(res.user));
-            router.push('/create');
+            router.push('/track');
         } catch (error) {
             if (error instanceof ApiError) {
                 throw error;
