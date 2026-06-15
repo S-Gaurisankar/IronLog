@@ -18,6 +18,10 @@ export default function LogsPage() {
     const { data, loading, load } = useLogsData(dateObject);
     const calendar = useCalendar(dateObject, load);
 
+    const isToday = calendar.selectedDay === calendar.todayDay &&
+        calendar.viewMonth === calendar.todayMonth &&
+        calendar.viewYear === calendar.todayYear;
+
     return (
         <div className={styles.page}>
             <LogsCalendar
@@ -27,6 +31,7 @@ export default function LogsPage() {
             <WorkoutDetail
                 loading={loading}
                 session={data?.workout_session}
+                isToday={isToday}
             />
         </div>
     );

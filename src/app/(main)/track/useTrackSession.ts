@@ -1,16 +1,97 @@
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { MuscleGroup, ModalConfig } from './types';
 import { TRACK_CONSTANTS } from 'src/constants';
 import { sessionsApi } from 'src/api/sessions';
+import { logsApi } from 'src/api/logs';
 import { ApiError } from 'src/api/client';
+
+interface ApiWorkoutSet {
+    id: string;
+    weight: number;
+    reps: number;
+    order: number;
+}
+
+interface ApiExercise {
+    id: string;
+    name: string;
+    order: number;
+    sets: ApiWorkoutSet[];
+}
+
+interface ApiMuscleGroup {
+    id: string;
+    name: string;
+    order: number;
+    exercises: ApiExercise[];
+}
+
+interface ApiWorkoutSession {
+    id: string;
+    user_id: string;
+    workout_date: string;
+    muscle_groups: ApiMuscleGroup[];
+}
 
 export const useTrackSession = () => {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const isEditParam = searchParams.get('edit') === 'true';
+
     const [modalConfig, setModalConfig] = useState<ModalConfig | null>(null);
     const [muscleGroups, setMuscleGroups] = useState<MuscleGroup[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
+    const [editingSessionId, setEditingSessionId] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        if (!isEditParam) return;
+
+        const loadTodaySession = async () => {
+            setIsLoading(true);
+            setSubmitError(null);
+            try {
+                const todayDate = new Date();
+                const dateStr = `${todayDate.getFullYear()}-${String(todayDate.getMonth() + 1).padStart(2, '0')}-${String(todayDate.getDate()).padStart(2, '0')}`;
+                
+                const logsData = await logsApi.getLogsByDate(dateStr);
+                const sessionId = logsData?.workout_session?.session_id;
+                
+                if (sessionId) {
+                    setEditingSessionId(sessionId);
+                    const sessionData = (await sessionsApi.getSession(sessionId)) as unknown as ApiWorkoutSession;
+                    
+                    if (sessionData && sessionData.muscle_groups) {
+                        const mappedGroups = sessionData.muscle_groups.map((mg: ApiMuscleGroup) => ({
+                            id: mg.id,
+                            name: mg.name,
+                            exercises: mg.exercises.map((ex: ApiExercise) => ({
+                                id: ex.id,
+                                name: ex.name,
+                                sets: ex.sets.map((s: ApiWorkoutSet) => ({
+                                    id: s.id,
+                                    kg: s.weight.toString(),
+                                    reps: s.reps.toString()
+                                }))
+                            }))
+                        }));
+                        setMuscleGroups(mappedGroups);
+                    }
+                } else {
+                    setSubmitError("No workout session found for today to edit.");
+                }
+            } catch (err) {
+                console.error('Failed to load today session:', err);
+                setSubmitError("Failed to load today's workout session.");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadTodaySession();
+    }, [isEditParam]);
 
     const handleUpdateMuscleGroup = (mgId: string, name: string) => {
         setMuscleGroups(prev => prev.map(mg => mg.id === mgId ? { ...mg, name } : mg));
@@ -235,7 +316,11 @@ export const useTrackSession = () => {
         };
 
         try {
-            await sessionsApi.createSession(payload);
+            if (editingSessionId) {
+                await sessionsApi.updateSession(editingSessionId, payload);
+            } else {
+                await sessionsApi.createSession(payload);
+            }
             router.push('/logs');
         } catch (err) {
             if (err instanceof ApiError) {
@@ -266,5 +351,7 @@ export const useTrackSession = () => {
         submitSession,
         isSubmitting,
         submitError,
+        isLoading,
+        isEdit: !!editingSessionId,
     };
 };

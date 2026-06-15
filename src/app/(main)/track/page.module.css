@@ -593,3 +593,85 @@
         transform: translateY(0);
     }
 }
+
+@keyframes shimmer {
+    0% {
+        background-position: -300px 0;
+    }
+
+    100% {
+        background-position: 300px 0;
+    }
+}
+
+.skeleton {
+    border-radius: 8px;
+    background: linear-gradient(90deg,
+            #1a1d2e 25%,
+            #232640 50%,
+            #1a1d2e 75%);
+    background-size: 600px 100%;
+    animation: shimmer 1.4s infinite linear;
+}
+
+.skeletonDateTitle {
+    height: 24px;
+    width: 160px;
+    margin-bottom: 8px;
+}
+
+.skeletonSubtitle {
+    height: 14px;
+    width: 120px;
+}
+
+.skeletonAddMgBtn {
+    height: 38px;
+    width: 128px;
+    border-radius: 10px;
+}
+
+.skeletonLabel {
+    height: 12px;
+    width: 100px;
+}
+
+.skeletonCardHeaderBtn {
+    height: 24px;
+    width: 24px;
+    border-radius: 6px;
+}
+
+.skeletonInput {
+    height: 45px;
+    width: 100%;
+}
+
+.skeletonExerciseLabel {
+    height: 10px;
+    width: 80px;
+}
+
+.skeletonExerciseInput {
+    height: 42px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.skeletonTableHeader {
+    height: 14px;
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+.skeletonTableRow {
+    height: 38px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.skeletonAddExerciseBtn {
+    height: 46px;
+    width: 100%;
+    border-radius: 0 0 18px 18px;
+}

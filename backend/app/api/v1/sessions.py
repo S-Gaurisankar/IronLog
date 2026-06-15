@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 from app.db.database import get_db
 from app.models.models import User, WorkoutSession, MuscleGroup, Exercise
-from app.schemas.sessions import SessionCreate
+from app.schemas.sessions import SessionCreate, Session as SessionSchema
 from app.api.deps import get_current_user
 from app.core.exceptions import NotFound, Forbidden
 from app.core.constants import APIConstants, SuccessMessages
@@ -28,7 +28,7 @@ def create_session(
 
     return {
         "status": APIConstants.STATUS_SUCCESS,
-        "data": session,
+        "data": SessionSchema.model_validate(session),
         "meta": _meta()
     }
 
@@ -107,7 +107,7 @@ def get_session(
 
     return {
         "status": APIConstants.STATUS_SUCCESS,
-        "data": session,
+        "data": SessionSchema.model_validate(session),
         "meta": _meta()
     }
 
@@ -131,7 +131,7 @@ def update_session(
 
     return {
         "status": APIConstants.STATUS_SUCCESS,
-        "data": updated_session,
+        "data": SessionSchema.model_validate(updated_session),
         "meta": _meta()
     }
 

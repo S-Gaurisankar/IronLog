@@ -11,6 +11,7 @@ export const LOGS_CONSTANTS = {
 
     // Workout detail
     WORKOUT_DETAIL_ARIA_LABEL: 'Workout details',
+    EDIT_WORKOUT_BTN_ID: 'edit-workout-btn',
     LOADING_ARIA_LABEL: 'Loading workout data',
     EMPTY_STATE_ARIA_LABEL: 'No workout logged',
     EMPTY_ICON: '🛌',
@@ -30,4 +31,7 @@ export const LOGS_CONSTANTS = {
     //Sets & PR
     SETS_COUNT_LABEL: 'Sets',
     PR_LABEL: 'PR',
+    EDIT_BTN: '✏️ Edit',
+    EDIT_TRACK_ROUTE: '/track?edit=true',
 };
+

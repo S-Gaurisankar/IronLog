@@ -1,17 +1,20 @@
 'use client';
 
+import { Suspense } from 'react';
 import styles from './page.module.css';
 import { PlusCircleSolidIcon, CheckCircleSolidIcon, DumbbellIcon } from 'src/assets';
 import { TRACK_CONSTANTS } from 'src/constants';
 import { useTrackSession } from './useTrackSession';
 import MuscleGroupCard from './MuscleGroupCard';
 import ConfirmModal from './ConfirmModal';
+import { TrackSkeleton } from './TrackSkeleton';
 
 
 //Props
 interface CreateSessionHeaderProps {
     getDateHeader: () => string;
     handleAddMuscleGroup: () => void;
+    isEdit: boolean;
 }
 
 interface AddMuscleGroupBtnProps {
@@ -34,11 +37,14 @@ const AddMuscleGroupBtn = ({ handleAddMuscleGroup }: AddMuscleGroupBtnProps) => 
 const CreateSessionHeader = ({
     getDateHeader,
     handleAddMuscleGroup,
+    isEdit,
 }: CreateSessionHeaderProps) => (
     <header className={styles.header}>
         <div className={styles.headerTextWrapper}>
-            <h1 className={styles.dateTitle}>{getDateHeader()}</h1>
-            <span className={styles.subtitle}>{TRACK_CONSTANTS.SUBTITLE}</span>
+            <h1 className={styles.dateTitle}>{isEdit ? TRACK_CONSTANTS.EDIT_HEADING : getDateHeader()}</h1>
+            <span className={styles.subtitle}>
+                {isEdit ? TRACK_CONSTANTS.EDIT_SUBTITLE : TRACK_CONSTANTS.SUBTITLE}
+            </span>
         </div>
         <AddMuscleGroupBtn handleAddMuscleGroup={handleAddMuscleGroup} />
     </header>
@@ -56,7 +62,7 @@ const EmptyState = ({ onAdd }: EmptyStateProps) => (
 );
 
 
-export default function TrackSessionPage() {
+function TrackSessionContent() {
     const {
         muscleGroups,
         modalConfig,
@@ -75,12 +81,22 @@ export default function TrackSessionPage() {
         submitSession,
         isSubmitting,
         submitError,
+        isLoading,
+        isEdit,
     } = useTrackSession();
+
+    if (isLoading) {
+        return <TrackSkeleton />;
+    }
 
     if (!muscleGroups.length) {
         return (
             <div className={styles.page}>
-                <CreateSessionHeader getDateHeader={getDateHeader} handleAddMuscleGroup={handleAddMuscleGroup} />
+                <CreateSessionHeader
+                    getDateHeader={getDateHeader}
+                    handleAddMuscleGroup={handleAddMuscleGroup}
+                    isEdit={isEdit}
+                />
                 <EmptyState onAdd={handleAddMuscleGroup} />
             </div>
         )
@@ -88,7 +104,11 @@ export default function TrackSessionPage() {
 
     return (
         <div className={styles.page}>
-            <CreateSessionHeader getDateHeader={getDateHeader} handleAddMuscleGroup={handleAddMuscleGroup} />
+            <CreateSessionHeader
+                getDateHeader={getDateHeader}
+                handleAddMuscleGroup={handleAddMuscleGroup}
+                isEdit={isEdit}
+            />
 
             {
                 muscleGroups.map((mg) => (
@@ -119,7 +139,7 @@ export default function TrackSessionPage() {
                     disabled={isSubmitting}
                 >
                     <span className={styles.finalizeIcon}><CheckCircleSolidIcon /></span>
-                    {isSubmitting ? 'Saving…' : TRACK_CONSTANTS.FINALIZE_BTN}
+                    {isSubmitting ? 'Saving…' : (isEdit ? TRACK_CONSTANTS.UPDATE_FINALIZE_BTN : TRACK_CONSTANTS.FINALIZE_BTN)}
                 </button>
             </div>
 
@@ -132,5 +152,13 @@ export default function TrackSessionPage() {
                 />
             )}
         </div>
+    );
+}
+
+export default function TrackSessionPage() {
+    return (
+        <Suspense fallback={<TrackSkeleton />}>
+            <TrackSessionContent />
+        </Suspense>
     );
 }

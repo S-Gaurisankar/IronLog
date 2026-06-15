@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import type { WorkoutSession } from 'src/types';
 import { LOGS_CONSTANTS } from 'src/constants';
 import styles from './page.module.css';
@@ -34,14 +35,25 @@ function EmptyState() {
 
 interface SessionViewProps {
     session: WorkoutSession;
+    isToday?: boolean;
+    onEdit?: () => void;
 }
 
-
-
-function SessionView({ session }: SessionViewProps) {
+function SessionView({ session, isToday, onEdit }: SessionViewProps) {
     return (
         <>
-            <h2 className={styles.sessionDate}>{session.display_date}</h2>
+            <div className={styles.sessionHeader}>
+                <h2 className={styles.sessionDate}>{session.display_date}</h2>
+                {isToday && (
+                    <button
+                        id={LOGS_CONSTANTS.EDIT_WORKOUT_BTN_ID}
+                        className={styles.editButton}
+                        onClick={onEdit}
+                    >
+                        {LOGS_CONSTANTS.EDIT_BTN}
+                    </button>
+                )}
+            </div>
             {session.muscle_groups.map((group) => (
                 <div key={group.group_name} className={styles.muscleGroup}>
                     <h3 className={styles.groupName}>{group.group_name}</h3>
@@ -71,17 +83,25 @@ function SessionView({ session }: SessionViewProps) {
 interface WorkoutDetailProps {
     loading: boolean;
     session: WorkoutSession | null | undefined;
+    isToday?: boolean;
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function WorkoutDetail({ loading, session }: WorkoutDetailProps) {
+export default function WorkoutDetail({ loading, session, isToday }: WorkoutDetailProps) {
+    const router = useRouter();
+
     if (!loading) {
         if (!session)
             return <EmptyState />;
+
+        const handleEdit = () => {
+            router.push(LOGS_CONSTANTS.EDIT_TRACK_ROUTE);
+        };
+
         return (
             <section className={styles.detail} aria-label={LOGS_CONSTANTS.WORKOUT_DETAIL_ARIA_LABEL}>
-                <SessionView session={session} />
+                <SessionView session={session} isToday={isToday} onEdit={handleEdit} />
             </section>
         )
     }

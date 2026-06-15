@@ -33,6 +33,10 @@ export const TRACK_CONSTANTS = {
     REPS_LABEL: 'REPS',
     SET_LABEL: 'SET',
     SUBTITLE: 'LOCK-IN TIME!',
+    EDIT_HEADING: 'Edit Workout',
+    EDIT_SUBTITLE: "Update today's session",
+    UPDATE_FINALIZE_BTN: 'UPDATE WORKOUT',
+    LOADING_WORKOUT_TEXT: "Loading today's workout details...",
 
     ERRORS: {
         NO_MG_NAME: 'Please provide a name for all muscle groups.',
